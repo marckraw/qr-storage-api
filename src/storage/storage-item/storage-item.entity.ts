@@ -14,11 +14,11 @@ export class StorageItem extends BaseEntity {
     @Column()
     name: string;
 
-    @Column()
-    description: string;
+    @Column({ nullable: true, type: 'text' })
+    description?: string;
 
-    @Column()
-    qrCode: string;
+    @Column({ nullable: true, type: 'text' })
+    qrCode?: string;
 
 
     // Relations

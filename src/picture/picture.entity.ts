@@ -23,13 +23,13 @@ export class Picture extends BaseEntity {
     @Column()
     name: string;
 
-    @Column()
-    description: string;
+    @Column({ nullable: true, type: 'text' })
+    description?: string;
 
     @Column()
     url: string;
 
-    @Column()
+    @Column({ nullable: true, type: 'text' })
     base64?: string;
 
     // Relations
