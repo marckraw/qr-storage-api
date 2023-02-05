@@ -1,9 +1,9 @@
 import {Controller, Get} from '@nestjs/common';
-import {StorageItemItemService} from "./storage-item.service";
+import {StorageItemService} from "./storage-item.service";
 
 @Controller('storage-item')
 export class StorageItemController {
-    constructor(private storageItemService: StorageItemItemService) {
+    constructor(private storageItemService: StorageItemService) {
     }
 
     @Get('')

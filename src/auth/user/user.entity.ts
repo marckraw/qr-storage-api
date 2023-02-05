@@ -1,4 +1,13 @@
-import {BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
+import {Picture} from "../../picture/picture.entity";
 
 export abstract class EntityBoilerplate extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
@@ -18,6 +27,9 @@ export class User extends EntityBoilerplate {
 
     @Column()
     lastName: string;
+
+    @OneToMany(type => Picture, picture => picture.user)
+    pictures: Picture[];
 
     /*
     *

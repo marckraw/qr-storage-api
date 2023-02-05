@@ -4,13 +4,8 @@ import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {AuthModule} from "./auth/auth.module";
 import {UtilPublicModule} from "./util-public/util-public.module";
-import {User} from "./auth/user/user.entity";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {LoggerMiddleware} from "./utils/logger.middleware";
-import {Tag} from "./tag/tag.entity";
-import {Storage} from "./storage/storage/storage.entity";
-import {StorageItem} from "./storage/storage-item/storage-item.entity";
-import {Picture} from "./picture/picture.entity";
 import {PictureModule} from "./picture/picture.module";
 import {TagModule} from "./tag/tag.module";
 import {StorageModule} from "./storage/storage.module";
@@ -19,17 +14,18 @@ import {StorageModule} from "./storage/storage.module";
     imports:
         [
             ConfigModule.forRoot({
+                envFilePath: ['.env.development', '.env.production'],
                 isGlobal: true
             }), // helps with getting envs into the project, also have ConfigService Globally available
             TypeOrmModule.forRoot({
                 type: 'postgres',
-                host: 'localhost',
-                port: 5432,
-                username: 'postgres',
-                password: '123',
-                database: 'qr-storage',
-                entities: [User, Tag, Storage, StorageItem, Picture],
+                host: process.env.DATABASE_HOST,
+                port: Number(process.env.DATABASE_PORT),
+                username: process.env.DATABASE_USERNAME,
+                password: process.env.DATABASE_PASSWORD,
+                database: process.env.DATABASE_NAME,
                 synchronize: true,
+                autoLoadEntities: true,
             }),
             AuthModule,
             UtilPublicModule,

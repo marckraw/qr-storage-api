@@ -4,7 +4,7 @@ import {Repository} from "typeorm";
 import {StorageItem} from "./storage-item.entity";
 
 @Injectable()
-export class StorageItemItemService {
+export class StorageItemService {
     constructor(@InjectRepository(StorageItem) private storageRepository: Repository<StorageItem>) {
     }
 
